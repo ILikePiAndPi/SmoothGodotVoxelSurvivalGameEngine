@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bj214q3vehsg6"]
+
+[ext_resource type="PackedScene" uid="uid://bv0hbs84kjl52" path="res://Player/player.tscn" id="1_5m3pj"]
+[ext_resource type="Script" uid="uid://cn5u1tyldbm8r" path="res://World Stuff/world.gd" id="1_8aqip"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t0xb6"]
+fractal_type = 2
+fractal_octaves = 10
+fractal_weighted_strength = 0.5
+domain_warp_type = 2
+domain_warp_fractal_type = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8aqip"]
+noise_type = 5
+frequency = 0.1
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5m3pj"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_bottom_color = Color(0.2, 0.16862746, 0.13333334, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8aqip"]
+sky_material = SubResource("ProceduralSkyMaterial_5m3pj")
+
+[sub_resource type="Environment" id="Environment_t0xb6"]
+background_mode = 2
+sky = SubResource("Sky_8aqip")
+ambient_light_energy = 0.25
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.2, 0.16862746, 0.13333334, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+
+[node name="Node3D" type="Node3D" unique_id=1953673668 node_paths=PackedStringArray("WorldChunksNode", "environment", "sun")]
+script = ExtResource("1_8aqip")
+noiseMap = SubResource("FastNoiseLite_t0xb6")
+groundMap = SubResource("FastNoiseLite_8aqip")
+WorldChunksNode = NodePath("WorldChunks")
+environment = NodePath("WorldEnvironment")
+sun = NodePath("Sun")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=910388951]
+environment = SubResource("Environment_t0xb6")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=979747442]
+transform = Transform3D(0.49999997, 0.7263101, -0.47167122, 0, 0.544639, 0.8386706, 0.86602545, -0.41933528, 0.27231947, 0, 0, 0)
+light_specular = 0.0
+shadow_enabled = true
+shadow_blur = 0.604
+directional_shadow_split_1 = 0.01
+directional_shadow_split_2 = 0.03
+directional_shadow_split_3 = 0.3
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 2000.0
+
+[node name="Player" parent="." unique_id=1354276080 instance=ExtResource("1_5m3pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5000, 0)
+
+[node name="WorldChunks" type="Node3D" parent="." unique_id=410183300]

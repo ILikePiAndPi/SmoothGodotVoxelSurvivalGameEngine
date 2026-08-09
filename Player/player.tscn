@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bv0hbs84kjl52"]
+
+[ext_resource type="Script" uid="uid://dsvod5hk0nsib" path="res://Player/player.gd" id="1_l8h54"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gjug"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1354276080 node_paths=PackedStringArray("camera_mount", "camera", "pos_label")]
+floor_max_angle = 1.553343
+script = ExtResource("1_l8h54")
+camera_mount = NodePath("CameraMount")
+camera = NodePath("CameraMount/Camera3D")
+pos_label = NodePath("CameraMount/Camera3D/MarginContainer/Position")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1395772124]
+shape = SubResource("CapsuleShape3D_4gjug")
+
+[node name="CameraMount" type="Node3D" parent="." unique_id=25357368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraMount" unique_id=1908977333]
+
+[node name="MarginContainer" type="MarginContainer" parent="CameraMount/Camera3D" unique_id=1192672464]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Position" type="Label" parent="CameraMount/Camera3D/MarginContainer" unique_id=952748844]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Position: "
